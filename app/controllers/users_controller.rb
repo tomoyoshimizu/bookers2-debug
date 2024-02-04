@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @new_book = Book.new
   end
 
-  def followed
+  def following
     @user = User.find(params[:id])
     @new_book = Book.new
   end

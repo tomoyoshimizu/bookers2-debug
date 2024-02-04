@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :edit, :update] do
     resource :relationships, only: [:create, :destroy]
     member do
-      get :followed # /users/:id/followed (user(id)がフォローする人の一覧)
+      get :following # /users/:id/following (user(id)がフォローする人の一覧)
       get :follower # /users/:id/follower (user(id)をフォローする人の一覧)
     end
   end
