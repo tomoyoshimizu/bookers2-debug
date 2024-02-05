@@ -1,10 +1,11 @@
 class CommentsController < ApplicationController
 
   def create
-    comment = Comment.new(comment_params)
-    comment.user_id = current_user.id
-    comment.book_id = Book.find(params[:book_id]).id
-    comment.save
+    # comment = Comment.new(comment_params)
+    # comment.user_id = current_user.id
+    # comment.book_id = Book.find(params[:book_id]).id
+    # comment.save
+    current_user.comments.create(comment_params)
     redirect_to request.referer
   end
 
