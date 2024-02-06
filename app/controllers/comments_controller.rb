@@ -1,17 +1,16 @@
 class CommentsController < ApplicationController
 
   def create
-    # comment = Comment.new(comment_params)
-    # comment.user_id = current_user.id
-    # comment.book_id = Book.find(params[:book_id]).id
-    # comment.save
-    current_user.comments.create(comment_params)
-    redirect_to request.referer
+    @book = Book.find(params[:book_id])
+    comment = Comment.new(comment_params)
+    comment.user_id = current_user.id
+    comment.book_id = @book.id
+    comment.save
   end
 
   def destroy
+    @book = Book.find(params[:book_id])
     Comment.find(params[:id]).destroy
-    redirect_to request.referer
   end
 
   private

@@ -1,0 +1,2 @@
+$(".comment-index").html("<%= escape_javascript(render partial: "comments/index", collection: @book.comments, as: "comment") %>");
+$(".comment-counter").html("<%= escape_javascript(render "comments/counter", comment: @book.comments) %>");
