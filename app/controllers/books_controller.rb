@@ -8,8 +8,7 @@ class BooksController < ApplicationController
   end
 
   def index
-    period = 1.week.ago.beginning_of_day..Time.zone.now.end_of_day
-    @books = Book.all.sort_by { |book| -book.favorites.where(created_at: period).count }
+    @books = Book.trend(Book.all)
     @new_book = Book.new
   end
 
@@ -19,7 +18,7 @@ class BooksController < ApplicationController
     if @new_book.save
       redirect_to book_path(@new_book), notice: "You have created book successfully."
     else
-      @books = Book.all
+      @books = Book.trend(Book.all)
       render 'index'
     end
   end

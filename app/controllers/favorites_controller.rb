@@ -9,10 +9,7 @@ class FavoritesController < ApplicationController
 
     case path[:action]
     when "index" then
-      period = 1.week.ago.beginning_of_day..Time.zone.now.end_of_day
-      #テスト用（1時間以内）
-      # period = 1.hour.ago..Time.zone.now
-      @books = Book.all.sort_by { |book| -book.favorites.where(created_at: period).count }
+      @books = Book.trend(Book.all)
       render 'books/render_index'
     else
       render 'render_btn'
@@ -29,10 +26,7 @@ class FavoritesController < ApplicationController
 
     case path[:action]
     when "index" then
-      period = 1.week.ago.beginning_of_day..Time.zone.now.end_of_day
-      #テスト用（1時間以内）
-      # period = 1.hour.ago..Time.zone.now
-      @books = Book.all.sort_by { |book| -book.favorites.where(created_at: period).count }
+      @books = Book.trend(Book.all)
       render 'books/render_index'
     else
       render 'render_btn'
