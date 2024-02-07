@@ -1,0 +1,3 @@
+
+$(".direct-message-index").html("<%= escape_javascript(render partial: "direct_messages/show", collection: @messages, as: "message") %>");
+$(".direct-message-form").val("");

@@ -34,7 +34,7 @@
         </tr>
       </table>
       <div class="comment-index">
-        <%= render partial: "comments/index", collection: @book.comments, as: "comment" %>
+        <%= render partial: "comments/show", collection: @book.comments, as: "comment" %>
       </div>
       <div>
         <%= form_with model: [@book, @new_comment], local: false do |f| %>

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
   resources :users, only: [:index, :show, :edit, :update] do
     resource :relationships, only: [:create, :destroy]
+    resources :direct_messages, only: [:index ,:create, :destroy]
     member do
       get :following # /users/:id/following (user(id)のフォローユーザーの一覧)
       get :follower # /users/:id/follower (user(id)のフォロワーの一覧)

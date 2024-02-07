@@ -1,0 +1,10 @@
+  <div>
+    <%= link_to(message.sender) do %>
+      <%= image_tag message.sender.get_profile_image, size: '50x50' %>
+      <%= message.sender.name %>
+    <% end %>
+    <% if message.sender == current_user %>
+     <%= link_to 'Destroy', user_direct_message_path(message.sender, message), method: :delete, remote: true, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
+    <% end %>
+  </div>
+  <p><%= message.message %></p>

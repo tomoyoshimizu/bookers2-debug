@@ -22,6 +22,9 @@ class User < ApplicationRecord
   # このユーザーのフォロワー（follower）は、ユーザーがフォローを送られた（followed_relationships）送り元（sender）です。
   has_many :follower, through: :followed_relationships, source: :sender
 
+  has_many :send_message_relationships, class_name: "DirectMessage", foreign_key: :sender_id, dependent: :destroy
+  has_many :receive_message_relationships, class_name: "DirectMessage", foreign_key: :recipient_id, dependent: :destroy
+
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :introduction, length: { maximum: 50 }
 
