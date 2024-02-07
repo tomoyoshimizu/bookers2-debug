@@ -8,7 +8,8 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all
+    period = 1.week.ago.beginning_of_day..Time.zone.now.end_of_day
+    @books = Book.all.sort_by { |book| -book.favorites.where(created_at: period).count }
     @new_book = Book.new
   end
 
