@@ -5,6 +5,20 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @new_book = Book.new
     @new_comment = Comment.new
+
+    current_user_access = @book.access_records.find_by(user_id: current_user.id)
+
+    if current_user_access.nil?
+      @book.access_records.create(user_id: current_user.id, count: 1)
+    else
+      if Time.now.yesterday > current_user_access[:updated_at]
+        count_up = current_user_access[:count] + 1
+        current_user_access.update(count: count_up)
+      end
+    end
+
+    @access_count = Book.total_access_count(@book)
+
   end
 
   def index

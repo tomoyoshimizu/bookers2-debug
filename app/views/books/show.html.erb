@@ -8,6 +8,7 @@
     </div>
     <div class='col-md-8 offset-md-1'>
   		<h2>Book detail</h2>
+  		<h3><%= @test %></h3>
   		<table class='table'>
   		  <tr id="book_<%= @book.id %>">
           <td><%= link_to(@book.user) do %>
@@ -27,6 +28,7 @@
               <%= render "comments/counter", comment: @book.comments %>
             </div>
           </td>
+          <td>閲覧数：<%= @access_count %></td>
           <% if @book.user == current_user %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
             <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>

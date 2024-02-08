@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :access_records
 
   # class_nameを用いてRelationshipの方向性（送る／送られる）を明確化する。
   # このユーザーは、フォローを送る（follow_relationships）と、Relationshipの送り元のID（sender_id）に紐づけられます。
