@@ -11,7 +11,7 @@ class BooksController < ApplicationController
     if current_user_access.nil?
       @book.access_records.create(user_id: current_user.id, count: 1)
     else
-      if Time.now.yesterday > current_user_access[:updated_at]
+      if Time.current.yesterday > current_user_access[:updated_at]
         count_up = current_user_access[:count] + 1
         current_user_access.update(count: count_up)
       end

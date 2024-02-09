@@ -5,22 +5,16 @@ module Searchable
 
     def search(search_word, search_type)
 
-      case self.to_s
-      when "User" then
-        target_column = "name"
-      when "Book" then
-        target_column = "title"
+      target_column = case self.to_s
+        when "User" then "name"
+        when "Book" then "title"
       end
 
-      case search_type
-      when "partial" then
-        search_string = "%" + search_word + "%"
-      when "perfect" then
-        search_string = search_word
-      when "forward" then
-        search_string = search_word + "%"
-      when "backward" then
-        search_string = "%" + search_word
+      search_string = case search_type
+        when "partial"  then "%" + search_word + "%"
+        when "perfect"  then search_word
+        when "forward"  then search_word + "%"
+        when "backward" then "%" + search_word
       end
 
       if search_word.present?
