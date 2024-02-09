@@ -7,8 +7,45 @@
       <%= render 'books/form', book: @new_book %>
     </div>
     <div class='col-md-8 offset-md-1'>
-      <h2>Books</h2>
-      <%= render 'books/index',books: @books %>
+      <div class="row">
+        <h2>Books</h2>
+        <%= render 'books/index',books: @books %>
+      </div>
+      <div class="row">
+        <h2>Data</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>今日の投稿数</th>
+              <th>前日の投稿数</th>
+              <th>前日比</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= @user.post_count( helper_period("today") ) %></td>
+              <td><%= @user.post_count( helper_period("yesterday") ) %></td>
+              <td><%= @user.post_comparison( helper_period("today"), helper_period("yesterday") ) %></td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>今週の投稿数</th>
+              <th>前週の投稿数</th>
+              <th>前週比</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= @user.post_count( helper_period("this_week") ) %></td>
+              <td><%= @user.post_count( helper_period("last_week") ) %></td>
+              <td><%= @user.post_comparison( helper_period("this_week"), helper_period("last_week") ) %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

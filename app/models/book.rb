@@ -13,16 +13,16 @@ class Book < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
 
-  def self.trend(books)
-    period = 1.week.ago.beginning_of_day..Time.zone.now.end_of_day
-    #検証用
-    # period = 2.minute.ago..Time.zone.now
-    # period = 1.hour.ago..Time.zone.now
-    books.sort_by { |book| -book.favorites.where(created_at: period).count }
+  def total_access_count
+    access_records.pluck(:count).sum
   end
 
-  def self.total_access_count(book)
-    book.access_records.pluck(:count).sum
+  def self.trend(books)
+    period = 1.week.ago.beginning_of_day..Time.now.end_of_day
+    #検証用
+    # period = 2.minute.ago..Time.now
+    # period = 1.hour.ago..Time.now
+    books.sort_by { |book| -book.favorites.where(created_at: period).count }
   end
 
 end

@@ -17,8 +17,6 @@ class BooksController < ApplicationController
       end
     end
 
-    @access_count = Book.total_access_count(@book)
-
   end
 
   def index
