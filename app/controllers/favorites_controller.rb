@@ -9,7 +9,7 @@ class FavoritesController < ApplicationController
 
     case path[:action]
     when "index" then
-      @books = Book.trend(Book.all)
+      @books = Book.trend
       render 'books/render_index'
     else
       render 'render_btn'
@@ -26,7 +26,7 @@ class FavoritesController < ApplicationController
 
     case path[:action]
     when "index" then
-      @books = Book.trend(Book.all)
+      @books = Book.trend
       render 'books/render_index'
     else
       render 'render_btn'

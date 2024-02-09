@@ -1,4 +1,5 @@
 class Favorite < ApplicationRecord
+  include Scope
 
   belongs_to :user
   belongs_to :book

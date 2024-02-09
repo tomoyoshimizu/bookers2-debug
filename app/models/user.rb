@@ -38,21 +38,18 @@ class User < ApplicationRecord
   end
 
   def post_count(period)
-    books.where(created_at: period).count
+    books.created_while(period).count
   end
 
   def post_comparison(period1, period2)
-
     result = post_count(period1) - post_count(period2)
     if result > 0
-      return "+" + result.to_s
+      "+" + result.to_s
     elsif result == 0
-      return "±" + result.to_s
+      "±" + result.to_s
     else
-      return result.to_s
+      result.to_s
     end
-
-
   end
 
 end

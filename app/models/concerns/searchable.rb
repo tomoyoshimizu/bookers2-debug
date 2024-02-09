@@ -1,9 +1,9 @@
 module Searchable
   extend ActiveSupport::Concern
 
-  included do
+  class_methods do
 
-    def self.search(search_word, search_type)
+    def search(search_word, search_type)
 
       case self.to_s
       when "User" then

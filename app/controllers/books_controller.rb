@@ -20,7 +20,7 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.trend(Book.all)
+    @books = Book.trend
     @new_book = Book.new
   end
 
@@ -30,7 +30,7 @@ class BooksController < ApplicationController
     if @new_book.save
       redirect_to book_path(@new_book), notice: "You have created book successfully."
     else
-      @books = Book.trend(Book.all)
+      @books = Book.trend
       render 'index'
     end
   end
