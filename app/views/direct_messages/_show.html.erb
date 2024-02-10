@@ -4,7 +4,7 @@
       <%= message.sender.name %>
     <% end %>
     <% if message.sender == current_user %>
-     <%= link_to 'Destroy', user_direct_message_path(message.sender, message), method: :delete, remote: true, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
+     <%= link_to 'Destroy', user_direct_message_path(message.recipient, message), method: :delete, remote: true, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
     <% end %>
   </div>
   <p><%= message.message %></p>

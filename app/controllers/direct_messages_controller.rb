@@ -1,6 +1,6 @@
 class DirectMessagesController < ApplicationController
 
-  before_action :not_myself, only: [:index, :create, :delete]
+  before_action :check, only: [:index, :create, :destroy]
 
   def index
     @new_book = Book.new
@@ -29,9 +29,9 @@ class DirectMessagesController < ApplicationController
     params.require(:direct_message).permit(:message)
   end
 
-  def not_myself
+  def check
     @user = User.find(params[:user_id])
-    if @user == current_user
+    unless @user.followed_by?(current_user) && current_user.followed_by?(@user)
       redirect_to user_path(current_user)
     end
   end
