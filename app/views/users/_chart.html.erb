@@ -1,0 +1,52 @@
+<table class="table">
+  <thead>
+    <tr>
+      <% weekly_post_data(@user).keys.reverse.each do |e| %>
+        <th><%= e %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% weekly_post_data(@user).values.reverse.each do |e| %>
+        <td><%= e %></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+
+<canvas id="myRadorChart"></canvas>
+<script>
+  var ctx = document.getElementById("myRadorChart");
+  var myRadorChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: <%= JSON.generate(weekly_post_data(@user).keys.reverse).html_safe %>,
+      datasets: [
+        {
+          label: "投稿した本の数",
+          data: <%= JSON.generate(weekly_post_data(@user).values.reverse).html_safe %>,
+          fill: true,
+          backgroundColor: "rgba(255, 99, 132, 0.2)",
+          borderColor: "rgb(255, 99, 132)",
+        },
+      ],
+    },
+    options: {
+      elements: {
+        line: {
+          borderWidth: 3,
+        },
+      },
+      scales: {
+        y: {
+          suggestedMin: 0,
+          suggestedMax: 10,
+          ticks: {
+            stepSize: 1,
+          }
+        }
+      },
+    },
+  });
+</script>
