@@ -16,4 +16,9 @@ class SearchesController < ApplicationController
     @new_book = Book.new
   end
 
+  def search_date
+    @search_date = params[:search_date]
+    @user = User.find(params[:user_id])
+  end
+
 end
