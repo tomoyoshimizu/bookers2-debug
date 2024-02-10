@@ -9,42 +9,12 @@
     <div class='col-md-8 offset-md-1'>
       <div class="row">
         <h2>Books</h2>
-        <%= render 'books/index',books: @books %>
+        <%= render 'books/index', books: @books %>
       </div>
       <div class="row">
         <h2>Data</h2>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>今日の投稿数</th>
-              <th>前日の投稿数</th>
-              <th>前日比</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><%= @user.post_count("today") %></td>
-              <td><%= @user.post_count("yesterday") %></td>
-              <td><%= @user.post_comparison("today", "yesterday") %></td>
-            </tr>
-          </tbody>
-        </table>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>今週の投稿数</th>
-              <th>前週の投稿数</th>
-              <th>前週比</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><%= @user.post_count("this_week") %></td>
-              <td><%= @user.post_count("last_week") %></td>
-              <td><%= @user.post_comparison("this_week", "last_week") %></td>
-            </tr>
-          </tbody>
-        </table>
+        <%= render 'users/data', user: @user %>
+        <%= render 'users/chart', user: @user %>
       </div>
     </div>
   </div>

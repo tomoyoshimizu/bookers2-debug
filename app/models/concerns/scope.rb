@@ -14,7 +14,7 @@ module Scope
     private
 
     def check_period(period)
-      case period.downcase
+      case period
         when "today"     then Time.current.all_day
         when "yesterday" then 1.day.ago.all_day
         when "this_week" then 6.day.ago.beginning_of_day..Time.current.end_of_day
