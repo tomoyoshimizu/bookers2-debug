@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'group/index'
+  get 'group/show'
+  get 'group/edit'
+  get 'group_users/create'
+  get 'group_users/destroy'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root :to => "homes#top"
@@ -19,7 +24,9 @@ Rails.application.routes.draw do
       get :follower # /users/:id/follower (user(id)のフォロワーの一覧)
     end
   end
-
+  resources :groups do
+    resources :groupusers, only: [:create, :destroy]
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 end
