@@ -1,18 +1,25 @@
 class EventMailMailer < ApplicationMailer
 
-  def send_mail(event_mail:, group:)
-    @event_mail = event_mail
-    mailing_list = Array.new
-    group.joined_users.each do |user|
+  def send_mail(member, mail_values)
+    @group = mail_values[:group]
+    @title = mail_values[:title]
+    @content = mail_values[:content]
+
+    @mail = EventMailMailer.new()
+    mail(
+      from: @group.owner.email,
+      to: member.email,
+      subject: @title
+    )
+  end
+
+  def self.send_mail_for_group(mail_values)
+    group = mail_values[:group]
+    group.joined_users.each do |member|
       unless user == group.owner
-        mailing_list.push(user.email)
+        EventMailMailer.send_mail(member, mail_values).deliver_now
       end
     end
-    mail(
-      from: group.owner.email,
-      cc: mailing_list,
-      subject: event_mail.title
-    )
   end
 
 end
