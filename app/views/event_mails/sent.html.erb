@@ -5,11 +5,10 @@
       <p>内容は以下の通りです。</p>
       <dl>
         <dt>[タイトル]</dt>
-        <dd><%= @event_mail.title %></dd>
+        <dd><%= @title %></dd>
         <dt>[本文]</dt>
-        <dd><%= @event_mail.content %></dd>
+        <dd><%= @content %></dd>
       </dl>
-      <%= link_to "Back", group_path(@group) %>
     </div>
   </div>
 </div>
