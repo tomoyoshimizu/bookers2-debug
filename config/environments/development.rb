@@ -75,4 +75,6 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   config.hosts << ENV['AWS_HOST']
+
+  config.action_mailer.delivery_method = :letter_opener_web
 end
