@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get 'group/index'
   get 'group/show'
   get 'group/edit'
@@ -26,6 +27,7 @@ Rails.application.routes.draw do
   end
   resources :groups do
     resources :group_users, only: [:create, :destroy]
+    resources :event_mails, only: [:new, :create, :show]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 

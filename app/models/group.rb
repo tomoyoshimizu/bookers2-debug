@@ -5,6 +5,7 @@ class Group < ApplicationRecord
   has_many :group_users, dependent: :destroy
   has_many :joined_users, through: :group_users, source: :user
   belongs_to :owner, class_name: "User"
+  has_many :event_mails, dependent: :destroy
 
   validates :name, presence: true
   validates :introduction, length:{ maximum: 200 }
