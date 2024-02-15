@@ -17,6 +17,7 @@
           </td>
           <td><%= link_to @book.title, @book %></td>
           <td><%= @book.body %></td>
+          <td><div class="raty" data-raty="<%= @book.score %>"></div></td>
           <td>
             <div class="favorite-btn">
               <%= render 'favorites/btn', book: @book %>
@@ -26,11 +27,13 @@
             <div class="comment-counter">
               <%= render "comments/counter", comment: @book.comments %>
             </div>
+            <div>閲覧数：<%= @book.total_access_count %></div>
           </td>
-          <td>閲覧数：<%= @book.total_access_count %></td>
           <% if @book.user == current_user %>
-            <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
-            <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+            <td>
+              <p><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></p>
+              <p><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></p>
+            </td>
           <% end %>
         </tr>
       </table>
@@ -50,3 +53,21 @@
     </div>
   </div>
 </div>
+<script>
+  document.addEventListener("turbolinks:load",() => {
+    const targetElements = document.querySelectorAll(".raty");
+    targetElements.forEach((element) => {
+      const dataScore = element.getAttribute("data-raty");
+      const ratyContainer = document.createElement("div");
+      raty(ratyContainer, {
+        number: 5,
+        hints: ['1', '2', '3', '4', '5'],
+        starOn: <%= JSON.generate(asset_path('star-on.png')).html_safe %>,
+        starOff: <%= JSON.generate(asset_path('star-off.png')).html_safe %>,
+        readOnly: true,
+        score: dataScore
+      });
+      element.replaceWith(ratyContainer);
+    });
+  });
+</script>

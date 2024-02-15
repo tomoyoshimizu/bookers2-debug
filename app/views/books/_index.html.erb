@@ -21,9 +21,30 @@
             <%= render 'favorites/btn', book: book %>
           </div>
         </td>
-        <td>コメント数：<%= book.comments.count %></td>
-        <td>閲覧数：<%= book.total_access_count %></td>
+        <td><div class="raty" data-raty="<%= book.score %>"></div></td>
+        <td>
+          <p>コメント数：<%= book.comments.count %></p>
+          <p>閲覧数：<%= book.total_access_count %></p>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<script>
+  document.addEventListener("turbolinks:load", () => {
+    const targetElements = document.querySelectorAll(".raty");
+    targetElements.forEach((element) => {
+      const dataScore = element.getAttribute("data-raty");
+      const ratyContainer = document.createElement("div");
+      raty(ratyContainer, {
+        number: 5,
+        hints: ['1', '2', '3', '4', '5'],
+        starOn: <%= JSON.generate(asset_path('star-on.png')).html_safe %>,
+        starOff: <%= JSON.generate(asset_path('star-off.png')).html_safe %>,
+        readOnly: true,
+        score: dataScore
+      });
+      element.replaceWith(ratyContainer);
+    });
+  });
+</script>

@@ -10,7 +10,7 @@
   </div>
   <div class="form-group">
     <%= f.label :score %>
-    <div id="raty_form" data-raty="<%= book.score %>"></div>
+    <div id="raty_edit_form" data-raty="<%= book.score %>"></div>
   </div>
   <div class="form-group">
     <%= f.submit class: 'btn btn-success' %>
@@ -19,7 +19,7 @@
   <script>
     document.addEventListener("turbolinks:load",() => {
 
-      const ratyForm = document.getElementById("raty_form");
+      const ratyForm = document.getElementById("raty_edit_form");
 
       const dataScore = ratyForm.getAttribute("data-raty");
       const ratyContainer = document.createElement("div");
@@ -30,6 +30,7 @@
           scoreName: 'book[score]',
           starOn: <%= JSON.generate(asset_path('star-on.png')).html_safe %>,
           starOff: <%= JSON.generate(asset_path('star-off.png')).html_safe %>,
+          readOnly: true,
           score: dataScore
         });
 

@@ -20,7 +20,8 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.trend
+    @books = Book.all.sort_by{|book| book[:created_at]}.reverse
+    @sort_type = params[:sort_type]
     @new_book = Book.new
   end
 
@@ -30,7 +31,7 @@ class BooksController < ApplicationController
     if @new_book.save
       redirect_to book_path(@new_book), notice: "You have created book successfully."
     else
-      @books = Book.trend
+      @books = Book.all
       render 'index'
     end
   end
@@ -54,7 +55,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body)
+    params.require(:book).permit(:title, :body, :score)
   end
 
   def ensure_correct_user
