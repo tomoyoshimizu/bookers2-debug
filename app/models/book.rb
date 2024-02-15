@@ -18,8 +18,4 @@ class Book < ApplicationRecord
     access_records.pluck(:count).sum
   end
 
-  def self.trend
-    self.all.sort_by { |book| -book.favorites.created_while("this_week").count }
-  end
-
 end
