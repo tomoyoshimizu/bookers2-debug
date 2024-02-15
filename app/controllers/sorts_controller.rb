@@ -6,11 +6,11 @@ class SortsController < ApplicationController
 
     @books = case @sort_type
     when "newest" then
-      Book.all.sort_by{|book| book[:created_at]}.reverse
+      Book.all.order("created_at DESC")
     when "trend" then
       Book.all.sort_by{|book| -book.favorites.created_while("this_week").count}
     when "rating"  then
-      Book.all.sort_by{|book| book[:score]}.reverse
+      Book.all.order("score DESC")
     end
 
     @new_book = Book.new
