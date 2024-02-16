@@ -21,4 +21,16 @@ class SearchesController < ApplicationController
     @user = User.find(params[:user_id])
   end
 
+  def search_tag
+    @search_tag = params[:search_tag]
+
+    if @search_tag.present?
+      @search_result = Book.where("tag LIKE ?", @search_tag)
+    else
+      @search_result = Book.all
+    end
+
+    @new_book = Book.new
+  end
+
 end
