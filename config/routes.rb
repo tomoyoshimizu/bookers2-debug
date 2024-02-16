@@ -1,16 +1,13 @@
 Rails.application.routes.draw do
-
-  get 'group/index'
-  get 'group/show'
-  get 'group/edit'
-  get 'group_users/create'
-  get 'group_users/destroy'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root :to => "homes#top"
+
   get "about" => "homes#about", as: "about"
+
   get "search" => "searches#search"
   get "search_date" => "searches#search_date"
+  get "search_tag" => "searches#search_tag"
 
   devise_for :users
   resources :books, only: [:index, :show, :edit, :create, :destroy, :update] do

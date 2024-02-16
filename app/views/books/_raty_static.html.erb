@@ -1,0 +1,18 @@
+<script>
+  document.addEventListener("turbolinks:load", () => {
+    const targetElements = document.querySelectorAll(".raty");
+    targetElements.forEach((element) => {
+      const dataScore = element.getAttribute("data-raty");
+      const ratyContainer = document.createElement("div");
+      raty(ratyContainer, {
+        number: 5,
+        hints: ['1', '2', '3', '4', '5'],
+        starOn: <%= JSON.generate(asset_path('star-on.png')).html_safe %>,
+        starOff: <%= JSON.generate(asset_path('star-off.png')).html_safe %>,
+        readOnly: true,
+        score: dataScore
+      });
+      element.replaceWith(ratyContainer);
+    });
+  });
+</script>

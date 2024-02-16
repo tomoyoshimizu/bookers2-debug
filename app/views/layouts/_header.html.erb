@@ -55,8 +55,6 @@
     </div>
   </nav>
   <% if user_signed_in? %>
-    <div class="container py-3 text-center" >
-      <%= render 'searches/form' %>
-    </div>
+  <%= render 'searches/form' %>
   <% end %>
 </header>
